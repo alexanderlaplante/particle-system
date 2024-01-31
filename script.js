@@ -1,17 +1,17 @@
 const canvas = document.getElementById('particleCanvas');
 const ctx = canvas.getContext('2d');
-canvas.width = window.innerWidth;
-canvas.height = window.innerHeight;
 
-let mouseX = 0;
-let mouseY = 0;
+// Setup and resize canvas
+const setupCanvas = () => {
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+};
 
-canvas.addEventListener('mousemove', (event) => {
-    mouseX = event.clientX - canvas.offsetLeft;
-    mouseY = event.clientY - canvas.offsetTop;
-});
+window.addEventListener('resize', setupCanvas);
+setupCanvas();
 
-const colors = ['red', 'blue', 'green', 'yellow', 'pink', 'white', 'purple']; // Add more colors as desired
+// Particle colors
+const colors = ['red', 'blue', 'green', 'yellow', 'pink', 'white', 'purple']; 
 
 class Particle {
     constructor() {
@@ -23,7 +23,7 @@ class Particle {
         this.color = colors[Math.floor(Math.random() * colors.length)];
     }
 
-    update() {
+    update(mouseX, mouseY) {
         let dx = mouseX - this.x;
         let dy = mouseY - this.y;
         let distance = Math.sqrt(dx * dx + dy * dy);
@@ -54,21 +54,32 @@ class Particle {
     }
 }
 
-const particles = [];
-for (let i = 0; i < 100; i++) {
-    particles.push(new Particle());
-}
+// Function to generate particles
+const generateParticles = (count) => Array.from({ length: count }, () => new Particle());
 
-function animate() {
+const randomParticleCount = Math.floor(Math.random() * (1000 - 100 + 1)) + 100;
+const particles = generateParticles(randomParticleCount);
+
+let mouseX = 0;
+let mouseY = 0;
+
+canvas.addEventListener('mousemove', (event) => {
+    mouseX = event.clientX - canvas.offsetLeft;
+    mouseY = event.clientY - canvas.offsetTop;
+});
+
+// Animation loop
+const animate = () => {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
-    ctx.fillStyle = 'black'; // Set the background to black
+    ctx.fillStyle = 'black'; 
     ctx.fillRect(0, 0, canvas.width, canvas.height);
     
-    for (let particle of particles) {
-        particle.update();
+    particles.forEach(particle => {
+        particle.update(mouseX, mouseY);
         particle.draw();
-    }
+    });
+
     requestAnimationFrame(animate);
-}
+};
 
 animate();

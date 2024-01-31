@@ -34,3 +34,6 @@ To explore this project, simply clone the repository, run the docker build comma
 
 1. Docker Build: `docker build -t particle-system .`
 2. Docker Run: `docker run -p 8080:80 particle-system`
+
+
+[Demo the Particle System](https://alexanderlaplante.github.io/particle-system/)
