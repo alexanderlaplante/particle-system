@@ -28,8 +28,9 @@ This project is a living example of my journey in exploring the creative possibi
 
 ### Getting Started:
 
-To explore this project, simply clone the repository, open the HTML file in a browser, and witness the interactive canvas in action.
+To explore this project, simply clone the repository, run the docker build command, and once that's complete run docker.
 
-### Contributions:
+**Commands**
 
-Feedback, suggestions, and contributions are welcome! If you have ideas on how to improve this project or want to collaborate, please feel free to open an issue or a pull request.
+1. Docker Build: `docker build -t particle-system .`
+2. Docker Run: `docker run -p 8080:80 particle-system`
