@@ -1,7 +1,7 @@
 const canvas = document.getElementById('particleCanvas');
 const ctx = canvas.getContext('2d');
 
-// Setup and resize canvas
+// Setup the initial canvas.
 const setupCanvas = () => {
     canvas.width = window.innerWidth;
     canvas.height = window.innerHeight;
@@ -10,7 +10,7 @@ const setupCanvas = () => {
 window.addEventListener('resize', setupCanvas);
 setupCanvas();
 
-// Particle colors
+// Particle color variations.
 const colors = ['red', 'blue', 'green', 'yellow', 'pink', 'white', 'purple']; 
 
 class Particle {
@@ -54,7 +54,6 @@ class Particle {
     }
 }
 
-// Function to generate particles
 const generateParticles = (count) => Array.from({ length: count }, () => new Particle());
 
 const randomParticleCount = Math.floor(Math.random() * (1000 - 100 + 1)) + 100;
@@ -68,7 +67,6 @@ canvas.addEventListener('mousemove', (event) => {
     mouseY = event.clientY - canvas.offsetTop;
 });
 
-// Animation loop
 const animate = () => {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
     ctx.fillStyle = 'black'; 
